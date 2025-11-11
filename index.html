@@ -12,19 +12,20 @@
 <body>
     <section id="homeScreen"class="home">
         <h1>Whack A Mole</h1>
+        <p>Pick a difficulty to enter the game area.</p>
         <div class="btnContainer">
-            <button id="easyBtn">EASY</button>
-            <button id="mediumBtn">MEDIUM</button>
-            <button id="hardBtn">HARD</button>
+            <button id="easyBtn" class="game-btn">EASY</button>
+            <button id="mediumBtn" class="game-btn">MEDIUM</button>
+            <button id="hardBtn" class="game-btn">HARD</button>
         </div>
     </section>
-    <section id="gameScreen" class="gameScreen">
+    <section id="gameScreen" class="gameScreen" style="display: none;">
         <div class="game-info">
             <div id="score">Score: 0</div>
             <div id="timer">Time: 15s</div>
         </div>
-        <button id="startButton">Start Game</button>
-        <button id="endButton" disabled>End Game</button>
+        <button id="startButton" class="game-btn">Start Game</button>
+        <button id="endButton" class="game-btn" disabled>End Game</button>
         <div class="game-container">
             <div class="hole" id="hole1"></div>
             <div class="hole" id="hole2"></div>
@@ -36,7 +37,17 @@
             <div class="hole" id="hole8"></div>
             <div class="hole" id="hole9"></div>
         </div>
+        <div class="gameBtnContainer">
+
+            <button id="backBtn" class="game-btn">BACK TO MENU</button>
+            <button id="playAgainBtn"class="game-btn">PLAY AGAIN</button>
+        </div>
     </section>
+
+    <footer>
+        <p>&copy; Owen Chan | For educational purposes only</p>
+        <p>BCIT FWD43</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 

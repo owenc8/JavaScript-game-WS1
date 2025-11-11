@@ -1,5 +1,21 @@
 document.addEventListener(
     "DOMContentLoaded", function () {
+
+    // Screen elements
+    const homeScreen = document.getElementById("homeScreen");
+    const gameScreen = document.getElementById("gameScreen");
+    
+    // Difficulty buttons
+    const easyBtn = document.getElementById("easyBtn");
+    const mediumBtn = document.getElementById("mediumBtn");
+    const hardBtn = document.getElementById("hardBtn");
+    const backButton = document.getElementById("backBtn");
+
+    //timer difficulty
+    const easyTime = 1000;
+    const mediumTime = 800;
+    const hardTime = 600;
+
     const holes = 
         document.querySelectorAll(".hole");
     const startButton = 
@@ -11,10 +27,46 @@ document.addEventListener(
     const timerDisplay = 
         document.getElementById("timer");
 
+    // Game state
+    let currentScreen = "home";
+    let difficulty = "easy"; 
+
     let timer;
     let score = 0;
     let countdown;
     let moleInterval;
+
+    // Function to switch screens
+    function showScreen(screen) {
+        if (screen === "home") {
+            homeScreen.style.display = "block";
+            gameScreen.style.display = "none";
+            currentScreen = "home";
+        } else if (screen === "game") {
+            homeScreen.style.display = "none";
+            gameScreen.style.display = "block";
+            currentScreen = "game";
+        }
+    }
+    
+    // Handle difficulty selection
+    function selectDifficulty(level) {
+        difficulty = level;
+        showScreen("game")
+    }
+
+    // Event listeners for difficulty buttons
+    easyBtn.addEventListener("click", () => selectDifficulty("easy"));
+    mediumBtn.addEventListener("click", () => selectDifficulty("medium"));
+    hardBtn.addEventListener("click", () => selectDifficulty("hard"));
+
+    // Back button
+    backButton.addEventListener("click", () => {
+        if (!gameOver) {
+            endGame();
+        }
+        showScreen("home");
+    });
     
     // Set the initial state to game over
     let gameOver = true; 
@@ -73,7 +125,7 @@ document.addEventListener(
         moleInterval = setInterval(() => {
             if (!gameOver) comeout();
         }, 1000);
-
+        // Math.random() * (1100 - 900) + 900)
         console.log("Game started");
     }
 
@@ -83,7 +135,7 @@ document.addEventListener(
         gameOver = true;
         alert(`Game Ended!\nYour final score: ${score}`);
         score = 0;
-        timer = 60;
+        timer = 15;
         scoreDisplay.textContent = `Score: ${score}`;
         timerDisplay.textContent = `Time: ${timer}s`;
         startButton.disabled = false;
