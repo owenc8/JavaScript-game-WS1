@@ -12,16 +12,17 @@ to use as inspiration for your game
 c. Non-styled or styled HTML output
 3. A plan for completing the project by the due date
 4. Questions or concerns about the project
+
 Modes: easy, medium, hard
-- quicker intervals as difficulty rises
-- 15-30 second timer for each mode
-- miss clicks penalty?
-- if a target isn't clicked do a penalty?
+- quicker intervals as difficulty rises WIP
+- 15-30 second timer for each mode (15 sec timer implemented)
+- miss clicks penalty? 
+- if a target isn't clicked do a penalty? 
 
 Home screen?
-- select mode
-- play button
+- select mode (IN HTML BUT NO FUNCTIONALITY)
+- play button (selected mode takes you to game screen)
 
 Losing
-- play again: to replay the mode
-- return home:  to select new mode
+- play again: to replay the mode (IN HTML BUT NO FUNCTIONALITY)
+- return home:  to select new mode (DONE)

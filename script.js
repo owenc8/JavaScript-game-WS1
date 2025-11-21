@@ -10,9 +10,14 @@ const backButton = document.getElementById("backBtn");
 //code for switching difficulty not finished yet 
 
 //timer difficulty
-const easyTime = 1000;
-const mediumTime = 800;
-const hardTime = 600;
+// spawn timings by difficulty (lower = faster spawns)
+const easyDelay = 1000;
+const mediumDelay = 800;
+const hardDelay = 600;
+
+// active spawn range used by startInterval()
+let spawnMin = 800;
+let spawnMax = 1100;
 
 const holes = 
     document.querySelectorAll(".hole");
@@ -50,6 +55,18 @@ function showScreen(screen) {
 // Handle difficulty selection
 function selectDifficulty(level) {
     difficulty = level;
+    console.log(difficulty);
+    // set spawn range based on selected difficulty
+    if (level === 'easy') {
+        spawnMin = Math.max(100, easyDelay - 200);
+        spawnMax = easyDelay + 200;
+    } else if (level === 'medium') {
+        spawnMin = Math.max(100, mediumDelay - 200);
+        spawnMax = mediumDelay + 200;
+    } else if (level === 'hard') {
+        spawnMin = Math.max(100, hardDelay - 200);
+        spawnMax = hardDelay + 200;
+    }
     showScreen("game")
 }
 
@@ -75,8 +92,8 @@ function comeout() {
         hole.removeEventListener(
             'click', handleMoleClick);
     });
-    //random number between 1 and 9 since there are nine holes 
-    let random = holes[Math.floor(Math.random() * 9)];
+    // pick a random hole
+    let random = holes[Math.floor(Math.random() * holes.length)];
     //add mole to random hole 
     random.classList.add('mole');
     random.addEventListener('click', handleMoleClick);
@@ -113,6 +130,13 @@ function startGame() {
         //once time runs out display an alert message with score
         if (timer <= 0) {
             clearInterval(countdown);
+            // stop spawning and clear any pending spawn
+            clearTimeout(moleInterval);
+            // remove any visible mole and its handlers
+            holes.forEach(hole => {
+                hole.classList.remove('mole');
+                hole.removeEventListener('click', handleMoleClick);
+            });
             gameOver = true;
             alert(`Game Over!\nYour final score: ${score}`);
             startButton.disabled = false;
@@ -122,12 +146,18 @@ function startGame() {
 
     function startInterval(){
 
-        const delay = getSpawnInterval(800, 1100);
+    //    if(difficulty==="easy"){
+        
+    //    }
+        let delay = getSpawnInterval(spawnMin, spawnMax);
 
         moleInterval = setTimeout(()=>{
-            if (!gameOver) comeout();
-            startInterval();
-        },delay)
+            if (!gameOver) {
+                comeout();
+                // only schedule the next spawn while the game is running
+                startInterval();
+            }
+        }, delay); //delay
     }
     startInterval();
     console.log("Game started");
@@ -135,8 +165,13 @@ function startGame() {
 
 function endGame() {
     clearInterval(countdown);
-    clearInterval(moleInterval);
+    clearTimeout(moleInterval);
     gameOver = true;
+    // remove any visible mole and its handlers
+    holes.forEach(hole => {
+        hole.classList.remove('mole');
+        hole.removeEventListener('click', handleMoleClick);
+    });
     alert(`Game Ended!\nYour final score: ${score}`);
     score = 0;
     timer = 15;
@@ -150,6 +185,14 @@ function endGame() {
 function getSpawnInterval(min, max){
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+const customCursor = document.querySelector('.custom-cursor');
+
+
+document.addEventListener('mousemove', (e) => {
+    customCursor.style.left = e.clientX-40 + 'px';
+    customCursor.style.top = e.clientY-40 + 'px';
+});
 
 startButton.addEventListener("click", startGame);
 endButton.addEventListener("click", endGame);

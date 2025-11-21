@@ -3,49 +3,63 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-           content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+           
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <!-- stylesheet -->
     <link rel="stylesheet" href="styles.css">
     <title>Whac-A-Mole</title>
 </head>
 
 <body>
     <!-- home -->
-    <section id="homeScreen"class="home">
-        <h1>Whack A Mole</h1>
-        <p>Pick a difficulty to enter the game area.</p>
-        <div class="btnContainer">
-            <button id="easyBtn" class="game-btn">EASY</button>
-            <button id="mediumBtn" class="game-btn">MEDIUM</button>
-            <button id="hardBtn" class="game-btn">HARD</button>
-        </div>
-    </section>
+    <div class="darken-box"></div>
+   <header>
+        <section id="homeScreen"class="home">
+            <h1>BROOD BASH</h1>
+            <h2>A Whac-A-Mole style game</h2>
+            <p>Pick a difficulty to enter the game area.</p>
+            <div class="btnContainer">
+                <button id="easyBtn" class="game-btn">EASY</button>
+                <button id="mediumBtn" class="game-btn">MEDIUM</button>
+                <button id="hardBtn" class="game-btn">HARD</button>
+            </div>
+        </section>
+   </header>
 
-    <!-- game -->
-    <section id="gameScreen" class="gameScreen" style="display: none;">
-        <div class="game-info">
-            <div id="score">Score: 0</div>
-            <div id="timer">Time: 15s</div>
-        </div>
-        <button id="startButton" class="game-btn">Start Game</button>
-        <button id="endButton" class="game-btn" disabled>End Game</button>
-        <div class="game-container">
-            <div class="hole" id="hole1"></div>
-            <div class="hole" id="hole2"></div>
-            <div class="hole" id="hole3"></div>
-            <div class="hole" id="hole4"></div>
-            <div class="hole" id="hole5"></div>
-            <div class="hole" id="hole6"></div>
-            <div class="hole" id="hole7"></div>
-            <div class="hole" id="hole8"></div>
-            <div class="hole" id="hole9"></div>
-        </div>
-        <div class="gameBtnContainer">
+ <main>
+        <!-- game -->
+        <section id="gameScreen" class="gameScreen" style="display: none;">
+            <div class="game-info">
+                <div id="score">Score: 0</div>
+                <div id="timer">Time: 15s</div>
+            </div>
+            <button id="startButton" class="game-btn">Start Game</button>
+            <button id="endButton" class="game-btn" disabled>End Game</button>
+            <div class="game-container">
+                <div class="hole" id="hole1"></div>
+                <div class="hole" id="hole2"></div>
+                <div class="hole" id="hole3"></div>
+                <div class="hole" id="hole4"></div>
+                <div class="hole" id="hole5"></div>
+                <div class="hole" id="hole6"></div>
+                <div class="hole" id="hole7"></div>
+                <div class="hole" id="hole8"></div>
+                <div class="hole" id="hole9"></div>
+            </div>
+            <div class="gameBtnContainer">
+    
+                <button id="backBtn" class="game-btn">BACK TO MENU</button>
+                <button id="playAgainBtn"class="game-btn">PLAY AGAIN</button>
+            </div>
+        </section>
+ </main>
 
-            <button id="backBtn" class="game-btn">BACK TO MENU</button>
-            <button id="playAgainBtn"class="game-btn">PLAY AGAIN</button>
-        </div>
-    </section>
+    <div class="custom-cursor"></div>
 
     <footer>
         <p>&copy; Owen Chan | For educational purposes only</p>
