@@ -10,7 +10,7 @@ body {
     margin: 0;
     background-image: url('images/pxlWarhammerBG.png'); 
     background-size: 100%;
-    /* ai generated */
+    /* ai generated background using microsoft copilot  */
 }
 header{
     text-align: center;
@@ -24,12 +24,15 @@ footer{
     flex-direction: column;
 	justify-content: center;
     align-self: flex-end;
+    /* position: fixed;
+    left: 0;
+    bottom: 0; */
 	width: 100%;
-	height: 8rem;
+	height: 10rem;
     border: 2px solid rgb(0, 0, 0);
     text-align: center;
     background-color: black;
-    scroll-margin-bottom: 5rem;
+   
 }
 
 h1{
@@ -56,12 +59,20 @@ button{
     border: solid 1px #ffe46c;
 }
 
+button:hover, button:focus, button:active{
+    color: black;
+    background-color: #ffe46c;
+    transition: 300ms;
+}
+
+
 .game-info {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     margin: 1rem;
+    gap: 1rem;
 }
 
 .game-btn{
@@ -95,6 +106,7 @@ button{
     background-size: 150px;
     background-image: url(
     "images/pixelated-gaunt.png")
+    /* original: https://www.reddit.com/r/Warhammer40k/comments/15le9so/tyranid_gaunt_test_scheme_hive_fleet_name/ */
 }
 
 /* game url: https://owenc8.github.io/JavaScript-game-WS1/ */
@@ -107,6 +119,7 @@ button{
     
     height: 70px;
     background-image: url('images/crozius-arcanum-pxl.png'); 
+    /* original: https://chaosgate.fandom.com/wiki/Crozius */
     background-size: cover; 
     z-index: 9999; 
 }

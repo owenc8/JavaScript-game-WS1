@@ -18,6 +18,13 @@
 <body>
     <!-- home -->
     <div class="darken-box"></div>
+    <audio id="audioElement" src="media/162_Dark_Angel.mp3"></audio>
+    <audio id="tyranidSFX" src="media/nazgul-scream-1-94999.mp3"></audio>
+    <audio id="weaponSFX" src="media/hit-rock-02-266304.mp3"></audio>
+    <audio id="btnSFX" src="media/light-switch-turn-on-47753.mp3"></audio>
+
+    <!-- Dark Angel by tabletopaudio.com Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License (CC BY-NC-ND 4.0)
+            https://tabletopaudio.com/about.html-->
    <header>
         <section id="homeScreen"class="home">
             <h1>BROOD BASH</h1>
@@ -34,12 +41,18 @@
  <main>
         <!-- game -->
         <section id="gameScreen" class="gameScreen" style="display: none;">
+            <p>Press START GAME when ready.</p>
             <div class="game-info">
+                
+                <div>
+                    <button id="startButton" class="game-btn">Start Game</button>
+                    <button id="endButton" class="game-btn" disabled>End Game</button>
+                </div>
                 <div id="score">Score: 0</div>
                 <div id="timer">Time: 15s</div>
+
             </div>
-            <button id="startButton" class="game-btn">Start Game</button>
-            <button id="endButton" class="game-btn" disabled>End Game</button>
+           
             <div class="game-container">
                 <div class="hole" id="hole1"></div>
                 <div class="hole" id="hole2"></div>

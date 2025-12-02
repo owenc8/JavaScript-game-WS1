@@ -7,7 +7,6 @@ const easyBtn = document.getElementById("easyBtn");
 const mediumBtn = document.getElementById("mediumBtn");
 const hardBtn = document.getElementById("hardBtn");
 const backButton = document.getElementById("backBtn");
-//code for switching difficulty not finished yet 
 
 //timer difficulty
 // spawn timings by difficulty (lower = faster spawns)
@@ -18,6 +17,20 @@ const hardDelay = 600;
 // active spawn range used by startInterval()
 let spawnMin = 800;
 let spawnMax = 1100;
+
+//audio
+const audio = document.getElementById('audioElement');
+// dark_angel by https://tabletopaudio.com/ ( Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License. )
+// can be used for free but can't be edited or remixed
+
+// Nazgul Scream 1 by freesound_community on Pixabay 
+const deathSound = document.getElementById('tyranidSFX')
+
+//hit rock 02 by u_xjrmmgxfru on pixabay
+const smash = document.getElementById('weaponSFX')
+
+// light-switch-turn-on by freesound_community from Pixabay
+const btnSound = document.getElementById('btnSFX')
 
 const holes = 
     document.querySelectorAll(".hole");
@@ -52,6 +65,9 @@ function showScreen(screen) {
     }
 }
 
+// background music
+
+
 // Handle difficulty selection
 function selectDifficulty(level) {
     difficulty = level;
@@ -67,7 +83,11 @@ function selectDifficulty(level) {
         spawnMin = Math.max(100, hardDelay - 200);
         spawnMax = hardDelay + 200;
     }
+    btnSound.volume = 0.6;
+    btnSound.play();
     showScreen("game")
+    audio.currentTime = 0;
+    audio.play();
 }
 
 // Event listeners for difficulty buttons
@@ -102,6 +122,10 @@ function comeout() {
 function handleMoleClick() {
     if (!gameOver) {
         score++;
+        deathSound.volume = 0.2;
+        deathSound.play();
+        smash.volume = 0.4;
+        smash.play();
         scoreDisplay.textContent = `Score: ${score}`;
     }
     this.classList.remove('mole');
@@ -114,7 +138,12 @@ function startGame() {
         // again if it's already in progress
         return;
     }
-
+    btnSound.volume = 0.6;
+    btnSound.play();
+    audio.pause();
+    audio.volume = 0.2;
+    audio.currentTime = 75;
+    audio.play();
     gameOver = false;
     score = 0;
     scoreDisplay.textContent = `Score: ${score}`;
@@ -123,6 +152,7 @@ function startGame() {
 
     startButton.disabled = true;
     endButton.disabled = false;
+
 
     countdown = setInterval(() => {
         timer--;
@@ -139,16 +169,14 @@ function startGame() {
             });
             gameOver = true;
             alert(`Game Over!\nYour final score: ${score}`);
+            endGame();
+            
             startButton.disabled = false;
             endButton.disabled = true;
         }
     }, 1000);
 
     function startInterval(){
-
-    //    if(difficulty==="easy"){
-        
-    //    }
         let delay = getSpawnInterval(spawnMin, spawnMax);
 
         moleInterval = setTimeout(()=>{
@@ -166,13 +194,19 @@ function startGame() {
 function endGame() {
     clearInterval(countdown);
     clearTimeout(moleInterval);
+    // sounds
+    btnSound.volume = 0.6;
+    btnSound.play();
+    audio.pause();
+
+    audio.currentTime = 0;
     gameOver = true;
     // remove any visible mole and its handlers
     holes.forEach(hole => {
         hole.classList.remove('mole');
         hole.removeEventListener('click', handleMoleClick);
     });
-    alert(`Game Ended!\nYour final score: ${score}`);
+
     score = 0;
     timer = 15;
     //reset to 15sec timer
